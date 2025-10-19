@@ -1,17 +1,12 @@
+#Codigo base
+
+#Importacion de la libreria
 from faker import Faker
-import random
+
 fake = Faker()
 
-ejCorreo = ['gmail.com', 'hotmail.com']
-
-
-for i in range(1):
-    nombre = fake.name()
-    usuario = fake.user_name()
-    ejCorreo = random.choice(ejCorreo)
-    correo = f"{usuario}@{ejCorreo}"
-
-    print("Nombre:", nombre)
-    print("Correo:", correo)
+for i in range(4):
+    print("Nombre:", fake.name())
+    print("Correo:", fake.email())
     print("Dirrección:",fake.address())
-    print("----------")
+    print("----------------------------------")
