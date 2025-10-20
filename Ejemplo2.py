@@ -1,4 +1,4 @@
-
+#Ejemplo Mexico 
 
 #Importacion de las librerias
 from faker import Faker
@@ -31,14 +31,26 @@ for i in range(4):
     apellido = quitar_tildes(partes[-1])
     numero = random.randint(10, 999)  # Toma un numero entre 10 y 999 para formar el correo
 
-
     #Seleccion aleatoria del dominio a utilizar
     dominio = random.choice(dominios)
     #Formacion del correo
     correo = f"{nombre}.{apellido}{numero}@{dominio}"
+    #Empresa del usuario
+    empresa = fake.company()
+    #Puesto de trabajo del usuario
+    puesto = fake.job()
+    #Direccion del usuario
+    direccion = fake.address().replace("\n", ", ")
+    #Telefono del usuario
+    telefono = fake.phone_number()
+    descripcion = fake.text(max_nb_chars=100)
 
     print(f"USUARIO {i+1}")
     print("Nombre:", nombre_completo)
     print("Correo:", correo)
-    print("Dirrección:",fake.address())
-    print("---------------------------------------")
+    print("Empresa:", empresa)
+    print("Puesto:", puesto)
+    print("Dirección:", direccion)
+    print("Teléfono:", telefono)
+    print("Descripción:", descripcion)
+    print("—" * 80)

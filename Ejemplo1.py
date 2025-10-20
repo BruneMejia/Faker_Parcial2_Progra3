@@ -3,7 +3,7 @@
 #Importacion de la libreria
 from faker import Faker
 
-fake = Faker()
+fake = Faker('ja_JP')
 
 for i in range(4):
     print("Nombre:", fake.name())
