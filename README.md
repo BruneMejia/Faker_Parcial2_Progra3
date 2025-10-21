@@ -23,7 +23,8 @@
 ---
 
 ## Descripción del ejercicio
-Este programa genera información falsa de usuarios, incluyendo nombre completo, correo electrónico y dirección en El Salvador.  
+Realizamos 3 ejercicios pero nos centraremos en el ejercicio 3.
+Este ejercicio genera información falsa de usuarios, incluyendo nombre completo, correo electrónico y dirección en El Salvador.  
 Se utiliza la librería **Faker** para crear nombres y direcciones aleatorias, y **PyQt5** para mostrar los resultados en una interfaz gráfica amigable.  
 También limpia los nombres de tildes para formar correos electrónicos válidos.  
 
