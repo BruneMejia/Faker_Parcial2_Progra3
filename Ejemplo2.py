@@ -4,27 +4,30 @@
 # Usa Faker para generar los datos y PyQt5 para mostrarlos en una ventana.
 # ------------------------------------------------------------
 
-# Importamos las librerías necesarias
+# Importamos las librerías necesarias para la generación de datos y la interfaz gráfica
+#Las librerías necesarias son Faker para los datos falsos y PyQt5 para la interfaz gráfica.
 from faker import Faker
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit
 import random
 import unicodedata
 import sys
 
-# Faker con datos basados en México
+# Faker con datos basados en México y configuración inicial
 fake = Faker('es_MX')
 
-# Lista de dominios válidos para los correos
+# Lista de dominios válidos para los correos electrónicos que se generarán
 dominios = ['gmail.com', 'hotmail.com']
 
 # Función que quita tildes a letras (para evitar errores en el correo)
+# Esta función utiliza unicodedata para normalizar el texto y eliminar los acentos.
 def quitar_tildes(texto):
     return ''.join(
         c for c in unicodedata.normalize('NFKD', texto)
         if not unicodedata.combining(c)
     )
 
-# Clase principal de la ventana
+# Clase principal de la ventana gráfica
+# Aquí creamos una ventana con PyQt5 que permita generar y mostrar los datos falsos de usuarios.
 class Ventana(QWidget):
     def __init__(self):
         super().__init__()
@@ -33,7 +36,8 @@ class Ventana(QWidget):
         
         layout = QVBoxLayout()  # Diseño vertical
 
-        # Cuadro donde se mostrarán los datos
+        # Cuadro donde se mostrarán los datos generados
+        # Área de texto para mostrar los datos generados
         self.texto = QTextEdit()
         # Botón para generar los datos
         boton = QPushButton("Generar datos")
@@ -47,7 +51,7 @@ class Ventana(QWidget):
     # Función para generar los datos falsos
     def generar_datos(self):
         self.texto.clear()  # Limpia el cuadro antes de mostrar nuevos datos
-        for i in range(4):  # Genera 4 usuarios
+        for i in range(5):  # Genera 5 usuarios
             nombre_completo = fake.name()
             partes = nombre_completo.lower().split()
 
