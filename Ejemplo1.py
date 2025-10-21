@@ -1,6 +1,6 @@
 # ------------------------------------------------------------
-# Ejercicio 1: Generador de datos falsos de Japón con interfaz gráfica
-# Este programa usa la librería Faker para crear nombres, correos y direcciones japonesas
+# Ejercicio 1: Generador de datos falsos con interfaz gráfica
+# Este programa usa la librería Faker para crear nombres, correos y direcciones
 # y los muestra en una ventana usando PyQt5.
 # ------------------------------------------------------------
 
@@ -9,14 +9,14 @@ from faker import Faker
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QTextEdit
 import sys
 
-# Creamos una instancia de Faker con datos en japonés
-fake = Faker('ja_JP')
+# Creamos una instancia de Faker con datos 
+fake = Faker()
 
 # Creamos la clase principal de la ventana
 class Ventana(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Datos falsos de Japón")  # Título de la ventana
+        self.setWindowTitle("Datos falsos")  # Título de la ventana
         self.resize(500, 400)  # Tamaño de la ventana
         
         layout = QVBoxLayout()  # Diseño vertical (de arriba a abajo)
