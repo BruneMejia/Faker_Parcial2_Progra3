@@ -4,15 +4,20 @@
 # y los muestra en una ventana usando PyQt5.
 # ------------------------------------------------------------
 
-# Importamos las librerías necesarias
+# Importamos las librerías necesarias para la generación de datos y la interfaz gráfica
+#Las librerías necesarias son Faker para los datos falsos y PyQt5 para la interfaz gráfica.
 from faker import Faker
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QTextEdit
 import sys
 
 # Creamos una instancia de Faker con datos 
+# configuración por defecto
+# Inicializamos Faker sin un local específico para datos genéricos.
 fake = Faker()
 
 # Creamos la clase principal de la ventana
+# Aquí creamos una ventana con PyQt5 que permita generar y mostrar los datos falsos de usuarios.
+# Esta ventana tendrá un botón para generar los datos y un área de texto para mostrarlos.
 class Ventana(QWidget):
     def __init__(self):
         super().__init__()
@@ -22,6 +27,7 @@ class Ventana(QWidget):
         layout = QVBoxLayout()  # Diseño vertical (de arriba a abajo)
 
         # Cuadro de texto donde se mostrarán los datos
+        # Área de texto para mostrar los datos generados
         self.texto = QTextEdit()
         
         # Botón que generará los datos al hacer clic

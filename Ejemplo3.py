@@ -4,14 +4,15 @@
 #También limpia los nombres de tildes para formar correos válidos.
 # -------------------------------
 
-# Importación de librerías
+# Importación de librerías necesarias para la generación de datos y la interfaz gráfica 
 from faker import Faker
 from faker.providers import BaseProvider
 import random
 import unicodedata
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit
 
-# Clase personalizada para generar direcciones de El Salvador
+# Clase personalizada para generar direcciones de El Salvador a partir de departamentos, ciudades y colonias
+#Vamos a definir un proveedor personalizado para Faker que genere direcciones en El Salvador de la siguiente manera:
 class ElSalvadorProvider(BaseProvider):
     def __init__(self, generator):
         super().__init__(generator)
@@ -87,7 +88,7 @@ class ElSalvadorProvider(BaseProvider):
                 "Santiago de María": ["Barrio El Calvario", "Colonia El Carmen", "Colonia Santa Julia"]
             }
         }
-    
+    # Métodos para obtener partes de la dirección y la dirección completa de manera aleatoria
     def departamento(self):
         return self.random_element(list(self.data.keys()))
 
@@ -104,7 +105,7 @@ class ElSalvadorProvider(BaseProvider):
         calle = f"Calle {self.generator.last_name()} #{random.randint(1, 200)}"
         return f"{calle}, {colonia}, {ciudad}, {departamento}, El Salvador"
 
-# Inicializar Faker y añadir nuestro proveedor
+# Inicializar Faker y añadir nuestro proveedor 
 fake = Faker('es_MX')
 fake.add_provider(ElSalvadorProvider)
 
@@ -119,7 +120,8 @@ def quitar_tildes(texto):
     )
 
 
-# Interfaz gráfica
+# Interfaz gráfica aquí vamos a crear una ventana con PyQt5 que permita generar y mostrar los datos falsos de usuarios.
+#Esta ventana tendrá un botón para generar los datos y un área de texto para mostrarlos.
 
 class VentanaPrincipal(QWidget):
     def __init__(self):
@@ -141,7 +143,7 @@ class VentanaPrincipal(QWidget):
         self.layout.addWidget(self.area_texto)
 
         self.setLayout(self.layout)
-
+# Función para generar y mostrar usuarios falsos aquí generamos cuatro usuarios falsos cada vez que se presiona el botón.
     def generar_usuarios(self):
         self.area_texto.clear()
         for i in range(4):
