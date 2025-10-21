@@ -1,11 +1,17 @@
+# -------------------------------
+#Ejercicio 3: Este programa genera información falsa de usuarios, incluyendo nombre, correo electrónico y dirección completa en El Salvador.
+#Utiliza la librería Faker y una clase personalizada para crear direcciones realistas.
+#También limpia los nombres de tildes para formar correos válidos.
+# -------------------------------
 
-
-#Importacion de las librerias
+# Importación de librerías
 from faker import Faker
 from faker.providers import BaseProvider
 import random
 import unicodedata
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit
 
+# Clase personalizada para generar direcciones de El Salvador
 class ElSalvadorProvider(BaseProvider):
     def __init__(self, generator):
         super().__init__(generator)
@@ -98,15 +104,14 @@ class ElSalvadorProvider(BaseProvider):
         calle = f"Calle {self.generator.last_name()} #{random.randint(1, 200)}"
         return f"{calle}, {colonia}, {ciudad}, {departamento}, El Salvador"
 
-
+# Inicializar Faker y añadir nuestro proveedor
 fake = Faker('es_MX')
 fake.add_provider(ElSalvadorProvider)
 
-#Delimitacion de dominios validos 
+# Dominios de correo válidos
 dominios = ['gmail.com', 'hotmail.com']
 
-#Funcion para quitar las tildes de los nombres y apellidos que se
-#usaran en el correo
+# Función para quitar tildes
 def quitar_tildes(texto):
     return ''.join(
         c for c in unicodedata.normalize('NFKD', texto)
@@ -114,26 +119,52 @@ def quitar_tildes(texto):
     )
 
 
-for i in range(4):
-    #Nombre del usuario
-    nombre_completo = fake.name()
-    #Convierte el nombre a minuscula y lo divide en partes
-    partes = nombre_completo.lower().split()
-    #Toma el primer nombre para formar el correo y si tiene tilde se la quita   
-    nombre = quitar_tildes(partes[0]) 
-    #Toma el primer apellido para formar el correo y si tiene tilde se la quita   
-    apellido = quitar_tildes(partes[-1])
-    numero = random.randint(10, 999)  # Toma un numero entre 10 y 999 para formar el correo
+# Interfaz gráfica
 
-    #Seleccion aleatoria del dominio a utilizar
-    dominio = random.choice(dominios)
-    #Formacion del correo
-    correo = f"{nombre}.{apellido}{numero}@{dominio}"
+class VentanaPrincipal(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Generador de Usuarios Falsos de El Salvador")
+        self.setGeometry(300, 200, 600, 400)
 
-    direccion = fake.direccion_completa()
+        # Layout principal
+        self.layout = QVBoxLayout()
 
-    print(f"USUARIO {i+1}")
-    print("Nombre:", nombre_completo)
-    print("Correo:", correo)
-    print("Dirrección:",direccion)
-    print("---------------------------------------")
+        # Botón para generar usuarios
+        self.boton_generar = QPushButton("Generar Usuarios")
+        self.boton_generar.clicked.connect(self.generar_usuarios)
+        self.layout.addWidget(self.boton_generar)
+
+        # Área de texto para mostrar los usuarios
+        self.area_texto = QTextEdit()
+        self.area_texto.setReadOnly(True)
+        self.layout.addWidget(self.area_texto)
+
+        self.setLayout(self.layout)
+
+    def generar_usuarios(self):
+        self.area_texto.clear()
+        for i in range(4):
+            nombre_completo = fake.name()
+            partes = nombre_completo.lower().split()
+            nombre = quitar_tildes(partes[0])
+            apellido = quitar_tildes(partes[-1])
+            numero = random.randint(10, 999)
+            dominio = random.choice(dominios)
+            correo = f"{nombre}.{apellido}{numero}@{dominio}"
+            direccion = fake.direccion_completa()
+
+            self.area_texto.append(f"USUARIO {i+1}")
+            self.area_texto.append(f"Nombre: {nombre_completo}")
+            self.area_texto.append(f"Correo: {correo}")
+            self.area_texto.append(f"Dirección: {direccion}")
+            self.area_texto.append("---------------------------------------")
+
+
+# Ejecución principal
+
+if __name__ == "__main__":
+    app = QApplication([])
+    ventana = VentanaPrincipal()
+    ventana.show()
+    app.exec_()
