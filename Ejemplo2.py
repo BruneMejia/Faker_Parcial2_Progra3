@@ -51,7 +51,7 @@ class Ventana(QWidget):
     # Función para generar los datos falsos
     def generar_datos(self):
         self.texto.clear()  # Limpia el cuadro antes de mostrar nuevos datos
-        for i in range(4):  # Genera 4 usuarios
+        for i in range(5):  # Genera 5 usuarios
             nombre_completo = fake.name()
             partes = nombre_completo.lower().split()
 

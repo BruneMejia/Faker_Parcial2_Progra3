@@ -42,7 +42,7 @@ class Ventana(QWidget):
     # Función que genera y muestra los datos falsos
     def generar_datos(self):
         self.texto.clear()  # Limpia el cuadro antes de mostrar nuevos datos
-        for i in range(4):  # Genera 4 registros
+        for i in range(5):  # Genera 5 registros
             nombre = fake.name()
             correo = fake.email()
             direccion = fake.address().replace("\n", ", ")  # Quita saltos de línea

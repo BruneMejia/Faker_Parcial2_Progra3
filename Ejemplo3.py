@@ -146,7 +146,7 @@ class VentanaPrincipal(QWidget):
 # Función para generar y mostrar usuarios falsos aquí generamos cuatro usuarios falsos cada vez que se presiona el botón.
     def generar_usuarios(self):
         self.area_texto.clear()
-        for i in range(4):
+        for i in range(5):
             nombre_completo = fake.name()
             partes = nombre_completo.lower().split()
             nombre = quitar_tildes(partes[0])
